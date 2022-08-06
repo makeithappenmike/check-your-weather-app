@@ -1,5 +1,6 @@
 // Define things
-var url = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=33.44&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd"
+var url = "http://api.openweathermap.org/geo/1.0/direct?q=" + "atlanta" + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+var city;
 var searchHistory = [];
 var searchHistoryList = $(".search").append(`
 <ul class="searcHistoryList"></ul>
@@ -17,7 +18,6 @@ if (localStorage.getItem("searchHistory") != null) {
     var existingHistory = JSON.parse(localStorage.getItem("searchHistory"));
     console.log("SearchHistory:", searchHistory);
     searchHistory = [...existingHistory];
-    // $(".search").append(searchHistory);
     searchHistory.forEach(city => {
         console.log(city);
         $(".searcHistoryList").append(`
@@ -27,7 +27,7 @@ if (localStorage.getItem("searchHistory") != null) {
 };
 
 $(".searchButton").click(function () {
-    var city = $(".input").val();
+    city = $(".input").val();
     searchHistory.push(city);
     console.log(city);
     console.log("click");
