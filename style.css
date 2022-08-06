@@ -1,0 +1,26 @@
+.nav {
+    background-image: linear-gradient(to right, rgb(85, 142, 241), darkblue);
+    color: white;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.search {
+    border: 1px solid black;
+}
+
+.display {
+    border: 1px solid black;
+}
+
+.forecast {
+    border: 1px solid black;
+}
+
+.searchButton {
+    margin-top: 10px;
+    border-radius: 5px;
+}
