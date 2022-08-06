@@ -26,6 +26,7 @@ if (localStorage.getItem("searchHistory") != null) {
     });
 };
 
+// Handle search button
 $(".searchButton").click(function () {
     city = $(".input").val();
     searchHistory.push(city);
@@ -35,6 +36,22 @@ $(".searchButton").click(function () {
 
     // Replace city name
     $(".cityHeading").text(city);
+
+    // Show current weather for city
+    $(".cityHeading").after(`
+    <p>Temp:</p>
+    <p>Wind:</p>
+    <p>Humidity</p>
+    <p>UV Index:</p>
+    `);
+
+    // Show future weather for city
+    $(".forecast").after(`
+    <p>Temp:</p>
+    <p>Wind:</p>
+    <p>Humidity</p>
+    <p>UV Index:</p>
+    `);
 
     // Add city to search area
     $(".searcHistoryList").append(`
