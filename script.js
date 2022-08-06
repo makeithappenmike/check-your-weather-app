@@ -17,7 +17,7 @@ if (localStorage.getItem("searchHistory") != null) {
     var existingHistory = JSON.parse(localStorage.getItem("searchHistory"));
     console.log("SearchHistory:", searchHistory);
     searchHistory = [...existingHistory];
-    $(".search").append(searchHistory);
+    // $(".search").append(searchHistory);
     searchHistory.forEach(city => {
         console.log(city);
         $(".searcHistoryList").append(`
@@ -34,5 +34,7 @@ $(".searchButton").click(function () {
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
     // Add city to search area
-    $(".search").append(city);
+    $(".searcHistoryList").append(`
+        <li>${city}</li>
+        `)
 });
