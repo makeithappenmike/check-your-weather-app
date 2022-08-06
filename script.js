@@ -33,6 +33,9 @@ $(".searchButton").click(function () {
     console.log("click");
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
+    // Replace city name
+    $(".cityHeading").text(city);
+
     // Add city to search area
     $(".searcHistoryList").append(`
         <li>${city}</li>
