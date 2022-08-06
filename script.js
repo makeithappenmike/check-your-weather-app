@@ -5,6 +5,13 @@ var searchHistory = [];
 var searchHistoryList = $(".search").append(`
 <ul class="searcHistoryList"></ul>
 `);
+var today = moment().format("MM/DD/YY");
+var day1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
+var day2 = moment(today, "MM/DD/YY").add(2, 'days').format("MM/DD/YY");
+var day3 = moment(today, "MM/DD/YY").add(3, 'days').format("MM/DD/YY");
+var day4 = moment(today, "MM/DD/YY").add(4, 'days').format("MM/DD/YY");
+var day5 = moment(today, "MM/DD/YY").add(5, 'days').format("MM/DD/YY");
+
 console.log("exsitingHistory: ", existingHistory);
 
 // Load weather from API
@@ -47,10 +54,11 @@ $(".searchButton").click(function () {
 
     // Show future weather for city
     $(".forecast").after(`
-    <p>Temp:</p>
-    <p>Wind:</p>
-    <p>Humidity</p>
-    <p>UV Index:</p>
+    <section>${day1}</section>
+    <section>${day2}</section>
+    <section>${day3}</section>
+    <section>${day4}</section>
+    <section>${day5}</section>
     `);
 
     // Add city to search area
