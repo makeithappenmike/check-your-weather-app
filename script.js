@@ -106,9 +106,9 @@ $(".searchButton").click(function (event) {
                         // Show current weather for city
                         $(".cityHeading").after(`
                         <section id="currentWeather">
-                        <p>Temp: ${weatherData.main.temp}</p>
-                        <p>Wind: ${weatherData.wind.deg}</p>
-                        <p>Humidity: ${weatherData.main.humidity}</p>
+                        <p>Temp: ${weatherData.main.temp}°F</p>
+                        <p>Wind: ${weatherData.wind.deg} MPH</p>
+                        <p>Humidity: ${weatherData.main.humidity} %</p>
                         <p>UV Index: ${uvi}</p>
                         </section>
                         `);
@@ -132,11 +132,11 @@ $(".searchButton").click(function (event) {
                         $(".forecastDisplay").append(`
                         <section class="forecastSection">
                             <ul class="forecastList">
-                                <li class="forecastItem">DATE: ${day1}</li>
-                                <li class="forecastItem"><img src="${icon}" /></li>
-                                <li class="forecastItem">Temp: ${forecastData.list[i].main.temp} degrees</li>
-                                <li class="forecastItem">Wind: ${forecastData.list[i].wind.speed}mph</li>
-                                <li class="forecastItem">Humidity: ${forecastData.list[i].main.humidity}%</li>
+                                <li class="forecastItem date">DATE: ${day1}</li>
+                                <li class="forecastItem text"><img src="${icon}" /></li>
+                                <li class="forecastItem text">Temp: ${forecastData.list[i].main.temp}°F</li>
+                                <li class="forecastItem text">Wind: ${forecastData.list[i].wind.speed} MPH</li>
+                                <li class="forecastItem text">Humidity: ${forecastData.list[i].main.humidity} %</li>
                             </ul>
                         </section>
                     `);
