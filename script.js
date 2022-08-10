@@ -30,7 +30,7 @@ if (localStorage.getItem("searchHistory") != null) {
             console.log(toTitleCase(city));
             // city = toTitleCase(city);
             $(".searcHistoryList").append(`
-            <li>${toTitleCase(city)}</li>
+            <li class="searchedCity">${toTitleCase(city)}</li>
             `);
         });
     };
@@ -64,11 +64,6 @@ $(".searchButton").click(function (event) {
         };
 
         // Replace city name (and convert to Title Case)
-        // function toTitleCase(city) {
-        //     return city.toLowerCase().split(' ').map(function (word) {
-        //       return (word.charAt(0).toUpperCase() + word.slice(1));
-        //     }).join(' ');
-        // }
         city = toTitleCase(city);
         $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
 
@@ -112,6 +107,7 @@ $(".searchButton").click(function (event) {
                     .then((weatherData) => {
                         // console.log(weatherData);
                         // Show current weather for city
+                        $("#currentWeather").empty();
                         $(".cityHeading").after(`
                         <section id="currentWeather">
                         <p>Temp: ${weatherData.main.temp}°F</p>
