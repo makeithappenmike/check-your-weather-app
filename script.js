@@ -57,6 +57,10 @@ $(".searchButton").click(function (event) {
         // Replace city name
         $(".cityHeading").text(city);
 
+        $(".forecast").append(`
+                        <h5>5-Day Forecast:</h>
+                        `);
+
         // Get the latitude and longitude of the City
         function getLatLong() {
             var locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
@@ -112,12 +116,13 @@ $(".searchButton").click(function (event) {
                 })
                     .then((forecastData) => {
                         console.log("forecast", forecastData.list.length);
-                        for (let i = 0; i < 4; i++) {
+                        
+                        for (let i = 0; i < 5; i++) {
                             let icon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
                             console.log("icon", icon);
                             console.log(forecastData.list[i]);
                             // Show future weather for city
-                        $(".forecast").after(`
+                        $(".forecastDisplay").append(`
                         <section class="forecastSection">
                             <ul class="forecastList">
                                 <li class="forecastItem">DATE: ${day1}</li>
