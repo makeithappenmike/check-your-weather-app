@@ -36,8 +36,34 @@ $(".searchButton").click(function () {
         // Replace city name
         $(".cityHeading").text(city);
 
+        // Get lat and lon from City
+        function getLatLong() {
+            var url3 = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=6798ccba44792929ff2f3dacdfb753cd";
+
+            // Call forecast API
+        fetch(url3)
+        .then((response3) => {
+            return response3.json();
+       })
+        .then((data3) => {
+            console.log("data3", data3);
+            
+            // // Show future weather for city
+            // $(".forecast").after(`
+            // <section class="forecastItem">${day1}</section>
+            // <section class="forecastItem">${day2}</section>
+            // <section class="forecastItem">${day3}</section>
+            // <section class="forecastItem">${day4}</section>
+            // <section class="forecastItem">${day5}</section>
+            // `);
+        });
+        } getLatLong();
+
         // Load weather from API
-        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
+        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+        // var url = "https://api.openweathermap.org/data/3.0/onecall?q=" + city  + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+        // var url2 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
+
         fetch(url)
         .then((response) => {
             return response.json();
@@ -47,7 +73,7 @@ $(".searchButton").click(function () {
             // Show current weather for city
             $(".cityHeading").after(`
             <p>Temp: ${data.main.temp}</p>
-            <p>Wind: ${JSON.stringify(data.wind)}</p>
+            <p>Wind: ${data.wind.deg}</p>
             <p>Humidity: ${data.main.humidity}</p>
             <p>UV Index: ${uvIndex}</p>
             `);
@@ -58,25 +84,14 @@ $(".searchButton").click(function () {
             `);
         });
 
+        // console.log("url", url);
 
-
-        console.log("url", url);
-
-        var temp = "";
-        var wind = "";
-        var humidity = "";
-        var uvIndex = "";
+        // var temp = "";
+        // var wind = "";
+        // var humidity = "";
+        // var uvIndex = "";
 
         
-
-        // Show future weather for city
-        $(".forecast").after(`
-        <section class="forecastItem">${day1}</section>
-        <section class="forecastItem">${day2}</section>
-        <section class="forecastItem">${day3}</section>
-        <section class="forecastItem">${day4}</section>
-        <section class="forecastItem">${day5}</section>
-        `);
 
         
     }; // add else here to show error
