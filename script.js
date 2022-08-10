@@ -39,8 +39,27 @@ $(".searchButton").click(function () {
         // Load weather from API
         var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
         fetch(url)
-        .then((response) => response.json())
-        .then((data) => console.log("data", data));
+        .then((response) => {
+            return response.json();
+       })
+        .then((data) => {
+            console.log(data);
+            // Show current weather for city
+            $(".cityHeading").after(`
+            <p>Temp: ${data.main.temp}</p>
+            <p>Wind: ${JSON.stringify(data.wind)}</p>
+            <p>Humidity: ${data.main.humidity}</p>
+            <p>UV Index: ${uvIndex}</p>
+            `);
+
+            // Add city to search area
+            $(".searcHistoryList").append(`
+            <li>${city}</li>
+            `);
+        });
+
+
+
         console.log("url", url);
 
         var temp = "";
@@ -48,13 +67,7 @@ $(".searchButton").click(function () {
         var humidity = "";
         var uvIndex = "";
 
-        // Show current weather for city
-        $(".cityHeading").after(`
-        <p>Temp: ${temp}</p>
-        <p>Wind: ${wind}</p>
-        <p>Humidity: ${humidity}</p>
-        <p>UV Index: ${uvIndex}</p>
-        `);
+        
 
         // Show future weather for city
         $(".forecast").after(`
@@ -65,9 +78,6 @@ $(".searchButton").click(function () {
         <section class="forecastItem">${day5}</section>
         `);
 
-        // Add city to search area
-        $(".searcHistoryList").append(`
-            <li>${city}</li>
-            `);
+        
     }; // add else here to show error
 });
