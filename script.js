@@ -6,6 +6,12 @@ var searchHistoryList = $(".search").append(`
 `);
 var today = moment().format("MM/DD/YY");
 var uvi;
+var forecastDay1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
+var forecastDay1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
+var forecastDay1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
+var forecastDay1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
+var forecastDay1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
+
 
 // Convert city to Title Case
 function toTitleCase(city) {
@@ -50,7 +56,7 @@ $(".searchButton").click(function (event) {
 
         // Add the recent search to the searchHistory
         if (!searchHistory.includes(city)) {
-            searchHistory.push(city);
+            searchHistory.push(city.toLowerCase());
             localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
         };
 
@@ -133,7 +139,7 @@ $(".searchButton").click(function (event) {
                         $(".forecastDisplay").append(`
                         <section class="forecastSection">
                             <ul class="forecastList">
-                                <li class="forecastItem date">DATE: ${moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY")}</li>
+                                <li class="forecastItem date">DATE: ${moment(today, "MM/DD/YY").add(i + 1, 'days').format("MM/DD/YY")}</li>
                                 <li class="forecastItem text"><img src="${forecastIcon}" /></li>
                                 <li class="forecastItem text">Temp: ${forecastData.list[i].main.temp}°F</li>
                                 <li class="forecastItem text">Wind: ${forecastData.list[i].wind.speed} MPH</li>
