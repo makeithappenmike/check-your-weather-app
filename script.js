@@ -12,6 +12,11 @@ var day4 = moment(today, "MM/DD/YY").add(4, 'days').format("MM/DD/YY");
 var day5 = moment(today, "MM/DD/YY").add(5, 'days').format("MM/DD/YY");
 var uvi;
 
+function toTitleCase(city) {
+    return city.toLowerCase().split(' ').map(function (word) {
+      return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+}
 
 // Show recent searches in search history
 // TO DO: Fix local storage double logging
@@ -22,9 +27,10 @@ if (localStorage.getItem("searchHistory") != null) {
     if (!existingHistory.includes(searchHistory)) {
         searchHistory = [...existingHistory];
         searchHistory.forEach(city => {
-            // console.log(city);
+            console.log(toTitleCase(city));
+            // city = toTitleCase(city);
             $(".searcHistoryList").append(`
-            <li>${city}</li>
+            <li>${toTitleCase(city)}</li>
             `);
         });
     };
@@ -43,11 +49,11 @@ $(".searchButton").click(function (event) {
     // If City is not null, display information
     if (city) {
 
-
         // Add city to search area
         if (!searchHistory.includes(city)) {
+            // toTitleCase(city);
             $(".searcHistoryList").append(`
-            <li>${city}</li>
+            <li>${toTitleCase(city)}</li>
             `);
         };
 
@@ -58,11 +64,11 @@ $(".searchButton").click(function (event) {
         };
 
         // Replace city name (and convert to Title Case)
-        function toTitleCase(city) {
-            return city.toLowerCase().split(' ').map(function (word) {
-              return (word.charAt(0).toUpperCase() + word.slice(1));
-            }).join(' ');
-        }
+        // function toTitleCase(city) {
+        //     return city.toLowerCase().split(' ').map(function (word) {
+        //       return (word.charAt(0).toUpperCase() + word.slice(1));
+        //     }).join(' ');
+        // }
         city = toTitleCase(city);
         $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
 
