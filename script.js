@@ -31,6 +31,15 @@ if (localStorage.getItem("searchHistory") != null) {
 $(".searchButton").click(function () {
     city = $(".input").val();
     if (city) {
+        // Add city to search area
+        console.log(searchHistory.includes(city));
+        if (!searchHistory.includes(city)) {
+            // console.log("Nope");
+            $(".searcHistoryList").append(`
+            <li>${city}</li>
+            `);
+        };
+
         searchHistory.push(city);
         localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
@@ -92,11 +101,6 @@ $(".searchButton").click(function () {
                     <section class="forecastItem">${day3}</section>
                     <section class="forecastItem">${day4}</section>
                     <section class="forecastItem">${day5}</section>
-                    `);
-
-                    // Add city to search area
-                    $(".searcHistoryList").append(`
-                    <li>${city}</li>
                     `);
                 });
             });
