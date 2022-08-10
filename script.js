@@ -1,9 +1,9 @@
 // Define things
 var city;
 var searchHistory = [];
-// var searchHistoryList = $(".search").append(`
-// <ul class="searcHistoryList"></ul>
-// `);
+var searchHistoryList = $(".search").append(`
+<ul class="searcHistoryList"></ul>
+`);
 var today = moment().format("MM/DD/YY");
 var day1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
 var day2 = moment(today, "MM/DD/YY").add(2, 'days').format("MM/DD/YY");
