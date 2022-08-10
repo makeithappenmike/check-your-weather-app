@@ -111,14 +111,52 @@ $(".searchButton").click(function (event) {
                         return forecastResponse.json();
                 })
                     .then((forecastData) => {
-                        console.log("forecast", forecastData);
+                        console.log("forecast", forecastData.list.length);
+                        for (let i = 0; i < 4; i++) {
+                            console.log(forecastData.list[i]);
+                        };
+                        
                         // Show future weather for city
                         $(".forecast").after(`
-                        <section class="forecastItem">${day1}</section>
-                        <section class="forecastItem">${day2}</section>
-                        <section class="forecastItem">${day3}</section>
-                        <section class="forecastItem">${day4}</section>
-                        <section class="forecastItem">${day5}</section>
+                        <section class="forecastItem">
+                            DATE: ${day1} <br>
+                            ${forecastData.list[1].weather[0].icon} <br>
+                            Temp: ${forecastData.list[1].main.temp} <br>
+                            Wind: ${forecastData.list[1].wind.speed} <br>
+                            Humidity: ${forecastData.list[1].main.humidity} <p>
+                        </section>
+
+                        <section class="forecastItem">
+                        DATE: ${day2} <br>
+                        ${forecastData.list[2].weather[0].icon} <br>
+                        Temp: ${forecastData.list[2].main.temp} <br>
+                        Wind: ${forecastData.list[2].wind.speed} <br>
+                        Humidity: ${forecastData.list[2].main.humidity} <p>
+                        </section>
+
+                        <section class="forecastItem">
+                        DATE: ${day3} <br>
+                        ${forecastData.list[3].weather[0].icon} <br>
+                        Temp: ${forecastData.list[3].main.temp} <br>
+                        Wind: ${forecastData.list[3].wind.speed} <br>
+                        Humidity: ${forecastData.list[3].main.humidity} <p>
+                        </section>
+
+                        <section class="forecastItem">
+                        DATE: ${day4} <br>
+                        ${forecastData.list[4].weather[0].icon} <br>
+                        Temp: ${forecastData.list[4].main.temp} <br>
+                        Wind: ${forecastData.list[4].wind.speed} <br>
+                        Humidity: ${forecastData.list[4].main.humidity} <p>
+                        </section>
+
+                        <section class="forecastItem">
+                        DATE: ${day5} <br>
+                        ${forecastData.list[5].weather[0].icon} <br>
+                        Temp: ${forecastData.list[5].main.temp} <br>
+                        Wind: ${forecastData.list[6].wind.speed} <br>
+                        Humidity: ${forecastData.list[5].main.humidity} <p>
+                        </section>
                     `);
                     });
 
