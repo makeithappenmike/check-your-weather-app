@@ -113,51 +113,65 @@ $(".searchButton").click(function (event) {
                     .then((forecastData) => {
                         console.log("forecast", forecastData.list.length);
                         for (let i = 0; i < 4; i++) {
+                            let icon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
+                            console.log("icon", icon);
                             console.log(forecastData.list[i]);
-                        };
-                        
-                        // Show future weather for city
+                            // Show future weather for city
                         $(".forecast").after(`
-                        <section class="forecastItem">
-                            DATE: ${day1} <br>
-                            ${forecastData.list[1].weather[0].icon} <br>
-                            Temp: ${forecastData.list[1].main.temp} <br>
-                            Wind: ${forecastData.list[1].wind.speed} <br>
-                            Humidity: ${forecastData.list[1].main.humidity} <p>
-                        </section>
-
-                        <section class="forecastItem">
-                        DATE: ${day2} <br>
-                        ${forecastData.list[2].weather[0].icon} <br>
-                        Temp: ${forecastData.list[2].main.temp} <br>
-                        Wind: ${forecastData.list[2].wind.speed} <br>
-                        Humidity: ${forecastData.list[2].main.humidity} <p>
-                        </section>
-
-                        <section class="forecastItem">
-                        DATE: ${day3} <br>
-                        ${forecastData.list[3].weather[0].icon} <br>
-                        Temp: ${forecastData.list[3].main.temp} <br>
-                        Wind: ${forecastData.list[3].wind.speed} <br>
-                        Humidity: ${forecastData.list[3].main.humidity} <p>
-                        </section>
-
-                        <section class="forecastItem">
-                        DATE: ${day4} <br>
-                        ${forecastData.list[4].weather[0].icon} <br>
-                        Temp: ${forecastData.list[4].main.temp} <br>
-                        Wind: ${forecastData.list[4].wind.speed} <br>
-                        Humidity: ${forecastData.list[4].main.humidity} <p>
-                        </section>
-
-                        <section class="forecastItem">
-                        DATE: ${day5} <br>
-                        ${forecastData.list[5].weather[0].icon} <br>
-                        Temp: ${forecastData.list[5].main.temp} <br>
-                        Wind: ${forecastData.list[6].wind.speed} <br>
-                        Humidity: ${forecastData.list[5].main.humidity} <p>
+                        <section>
+                            <ul class="forecastItem">
+                                <li>DATE: ${day1}</li>
+                                <li><img src="${icon}" /></li>
+                                <li>Temp: ${forecastData.list[i].main.temp}</li>
+                                <li>Wind: ${forecastData.list[i].wind.speed}</li>
+                                <li>Humidity: ${forecastData.list[i].main.humidity}</li>
+                            </ul>
                         </section>
                     `);
+                        };
+                        
+                    //     // Show future weather for city
+                    //     $(".forecast").after(`
+                    //     <section class="forecastItem">
+                    //         DATE: ${day1} <br>
+                    //         ${forecastData.list[1].weather[0].icon} <br>
+                    //         Temp: ${forecastData.list[1].main.temp} <br>
+                    //         Wind: ${forecastData.list[1].wind.speed} <br>
+                    //         Humidity: ${forecastData.list[1].main.humidity} <p>
+                    //     </section>
+
+                    //     <section class="forecastItem">
+                    //     DATE: ${day2} <br>
+                    //     <img src="${forecastData.list[2].weather[0].icon + ".png"}" /> <br>
+                    //     Temp: ${forecastData.list[2].main.temp} <br>
+                    //     Wind: ${forecastData.list[2].wind.speed} <br>
+                    //     Humidity: ${forecastData.list[2].main.humidity} <p>
+                    //     </section>
+
+                    //     <section class="forecastItem">
+                    //     DATE: ${day3} <br>
+                    //     ${forecastData.list[3].weather[0].icon} <br>
+                    //     Temp: ${forecastData.list[3].main.temp} <br>
+                    //     Wind: ${forecastData.list[3].wind.speed} <br>
+                    //     Humidity: ${forecastData.list[3].main.humidity} <p>
+                    //     </section>
+
+                    //     <section class="forecastItem">
+                    //     DATE: ${day4} <br>
+                    //     ${forecastData.list[4].weather[0].icon} <br>
+                    //     Temp: ${forecastData.list[4].main.temp} <br>
+                    //     Wind: ${forecastData.list[4].wind.speed} <br>
+                    //     Humidity: ${forecastData.list[4].main.humidity} <p>
+                    //     </section>
+
+                    //     <section class="forecastItem">
+                    //     DATE: ${day5} <br>
+                    //     ${forecastData.list[5].weather[0].icon} <br>
+                    //     Temp: ${forecastData.list[5].main.temp} <br>
+                    //     Wind: ${forecastData.list[6].wind.speed} <br>
+                    //     Humidity: ${forecastData.list[5].main.humidity} <p>
+                    //     </section>
+                    // `);
                     });
 
                 });
