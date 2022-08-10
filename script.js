@@ -43,6 +43,7 @@ $(".searchButton").click(function (event) {
     // If City is not null, display information
     if (city) {
 
+
         // Add city to search area
         if (!searchHistory.includes(city)) {
             $(".searcHistoryList").append(`
@@ -54,12 +55,18 @@ $(".searchButton").click(function (event) {
         searchHistory.push(city);
         localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
-        // Replace city name
+        // Replace city name (and convert to Title Case)
+        function toTitleCase(city) {
+            return city.toLowerCase().split(' ').map(function (word) {
+              return (word.charAt(0).toUpperCase() + word.slice(1));
+            }).join(' ');
+        }
+        city = toTitleCase(city);
         $(".cityHeading").text(city);
 
         $(".forecast").append(`
-                        <h5>5-Day Forecast:</h>
-                        `);
+        <h5>5-Day Forecast:</h>
+        `);
 
         // Get the latitude and longitude of the City
         function getLatLong() {

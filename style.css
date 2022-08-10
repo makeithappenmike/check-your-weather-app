@@ -29,6 +29,7 @@
     /* background-color: rgb(162, 0, 255); */
     display: flex;
     flex-wrap: wrap;
+    margin-left: -25px;
 }
 
 .forecastList {
