@@ -59,7 +59,7 @@ $(".searchButton").click(function (event) {
 
         // Get the latitude and longitude of the City
         function getLatLong() {
-            var locationUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
+            var locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
 
             // Call Geo API to get the lat and lon
             fetch(locationUrl)
