@@ -53,7 +53,7 @@ $(".searchButton").click(function (event) {
         if (!searchHistory.includes(city)) {
             // toTitleCase(city);
             $(".searcHistoryList").append(`
-            <li>${toTitleCase(city)}</li>
+            <li class="searchedCity">${toTitleCase(city)}</li>
             `);
         };
 

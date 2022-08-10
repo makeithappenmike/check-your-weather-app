@@ -69,3 +69,18 @@
     /* margin-top: 20px; */
 }
 
+.searchedCity {
+    list-style: none;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: -40px;
+    color: rgb(162, 161, 161);
+    text-align: center;
+}
+
+.searchedCity:hover {
+    background-color: rgb(203, 202, 202);
+    color: rgb(149, 147, 147);
+    cursor: pointer;
+}
