@@ -63,46 +63,82 @@ $(".searchButton").click(function () {
             .then((data4) => {
                 console.log("data4", data4.current.uvi);
                 uvi = data4.current.uvi;
+            })
+            .then((data4) => {
+                // Load weather from API
+                var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+                // var url = "https://api.openweathermap.org/data/3.0/onecall?q=" + city  + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+                // var url2 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
+
+                // Get current weather
+                fetch(url)
+                .then((response) => {
+                    return response.json();
+            })
+                .then((data) => {
+                    console.log(data);
+                    // Show current weather for city
+                    $(".cityHeading").after(`
+                    <p>Temp: ${data.main.temp}</p>
+                    <p>Wind: ${data.wind.deg}</p>
+                    <p>Humidity: ${data.main.humidity}</p>
+                    <p>UV Index: ${uvi}</p>
+                    `);
+
+                    // Show future weather for city
+                    $(".forecast").after(`
+                    <section class="forecastItem">${day1}</section>
+                    <section class="forecastItem">${day2}</section>
+                    <section class="forecastItem">${day3}</section>
+                    <section class="forecastItem">${day4}</section>
+                    <section class="forecastItem">${day5}</section>
+                    `);
+
+                    // Add city to search area
+                    $(".searcHistoryList").append(`
+                    <li>${city}</li>
+                    `);
+                });
             });
         });
         } getLatLong();
 
         
 
-        // Load weather from API
-        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-        // var url = "https://api.openweathermap.org/data/3.0/onecall?q=" + city  + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-        // var url2 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
+    //     // Load weather from API
+    //     var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+    //     // var url = "https://api.openweathermap.org/data/3.0/onecall?q=" + city  + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+    //     // var url2 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
 
-        // Get current weather
-        fetch(url)
-        .then((response) => {
-            return response.json();
-       })
-        .then((data) => {
-            console.log(data);
-            // Show current weather for city
-            $(".cityHeading").after(`
-            <p>Temp: ${data.main.temp}</p>
-            <p>Wind: ${data.wind.deg}</p>
-            <p>Humidity: ${data.main.humidity}</p>
-            <p>UV Index: ${uvi}</p>
-            `);
+    //     // Get current weather
+    //     fetch(url)
+    //     .then((response) => {
+    //         return response.json();
+    //    })
+    //     .then((data) => {
+    //         console.log(data);
+    //         // Show current weather for city
+    //         $(".cityHeading").after(`
+    //         <p>Temp: ${data.main.temp}</p>
+    //         <p>Wind: ${data.wind.deg}</p>
+    //         <p>Humidity: ${data.main.humidity}</p>
+    //         <p>UV Index: ${uvi}</p>
+    //         `);
 
-                        // // Show future weather for city
-            // $(".forecast").after(`
-            // <section class="forecastItem">${day1}</section>
-            // <section class="forecastItem">${day2}</section>
-            // <section class="forecastItem">${day3}</section>
-            // <section class="forecastItem">${day4}</section>
-            // <section class="forecastItem">${day5}</section>
-            // `);
+    //                     // // Show future weather for city
+    //         // $(".forecast").after(`
+    //         // <section class="forecastItem">${day1}</section>
+    //         // <section class="forecastItem">${day2}</section>
+    //         // <section class="forecastItem">${day3}</section>
+    //         // <section class="forecastItem">${day4}</section>
+    //         // <section class="forecastItem">${day5}</section>
+    //         // `);
 
-            // Add city to search area
-            $(".searcHistoryList").append(`
-            <li>${city}</li>
-            `);
-        });
+    //         // Add city to search area
+    //         $(".searcHistoryList").append(`
+    //         <li>${city}</li>
+    //         `);
+    //     });
 
         // console.log("url", url);
 
