@@ -66,7 +66,8 @@ $(".searchButton").click(function (event) {
         // Replace city name (and convert to Title Case)
         city = toTitleCase(city);
         $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
-
+        
+        $(".forecast").empty();
         $(".forecast").append(`
         <h5>5-Day Forecast:</h>
         `);
@@ -107,6 +108,7 @@ $(".searchButton").click(function (event) {
                     .then((weatherData) => {
                         // console.log(weatherData);
                         // Show current weather for city
+                        $(".forecastSection").remove();
                         $("#currentWeather").empty();
                         $(".cityHeading").after(`
                         <section id="currentWeather">
