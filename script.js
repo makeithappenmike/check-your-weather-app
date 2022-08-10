@@ -118,13 +118,13 @@ $(".searchButton").click(function (event) {
                             console.log(forecastData.list[i]);
                             // Show future weather for city
                         $(".forecast").after(`
-                        <section>
-                            <ul class="forecastItem">
-                                <li>DATE: ${day1}</li>
-                                <li><img src="${icon}" /></li>
-                                <li>Temp: ${forecastData.list[i].main.temp} degrees</li>
-                                <li>Wind: ${forecastData.list[i].wind.speed}mph</li>
-                                <li>Humidity: ${forecastData.list[i].main.humidity}%</li>
+                        <section class="forecastSection">
+                            <ul class="forecastList">
+                                <li class="forecastItem">DATE: ${day1}</li>
+                                <li class="forecastItem"><img src="${icon}" /></li>
+                                <li class="forecastItem">Temp: ${forecastData.list[i].main.temp} degrees</li>
+                                <li class="forecastItem">Wind: ${forecastData.list[i].wind.speed}mph</li>
+                                <li class="forecastItem">Humidity: ${forecastData.list[i].main.humidity}%</li>
                             </ul>
                         </section>
                     `);
@@ -135,6 +135,6 @@ $(".searchButton").click(function (event) {
                 });
             });
             } getLatLong();
-            
+
     }; // add else here to show error
 });
