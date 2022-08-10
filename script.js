@@ -42,14 +42,14 @@ $(".searchButton").click(function (event) {
 
     // If City is not null, display information
     if (city) {
+
         // Add city to search area
-        // console.log(searchHistory.includes(city));
         if (!searchHistory.includes(city)) {
-            // console.log("Nope");
             $(".searcHistoryList").append(`
             <li>${city}</li>
             `);
         };
+
         // Add the recent search to the searchHistory
         searchHistory.push(city);
         localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
@@ -57,56 +57,61 @@ $(".searchButton").click(function (event) {
         // Replace city name
         $(".cityHeading").text(city);
 
-        // Get lat and lon from City
+        // Get the latitude and longitude of the City
         function getLatLong() {
             var locationUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
 
-            // Call forecast API
+            // Call Geo API to get the lat and lon
             fetch(locationUrl)
             .then((locationReponse) => {
                 return locationReponse.json();
-        })
-            .then((locationReponse) => {
-                // console.log("data3", data3[0]);
-                var lat = locationReponse[0].lat;
-                var lon = locationReponse[0].lon;
-                // console.log(lat);
-                // console.log(lon);
-                // Get UVIndex
-                // function getUVIndex() {
-                    var uviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
+             })
+            .then((locationData) => {
+                var lat = locationData[0].lat;
+                var lon = locationData[0].lon;
+
+                // With lat and lon, get the uvIndex
+                var uviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
 
                 return fetch(uviUrl)
                 .then((uviResponse) => {
                     return uviResponse.json();
                 })
                 .then((uviResponse) => {
-                    // console.log("data4", data4.current.uvi);
                     uvi = uviResponse.current.uvi;
                 })
-                .then((data4) => {
-                    // Load weather from API
-                    var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-                    // var url = "https://api.openweathermap.org/data/3.0/onecall?q=" + city  + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-                    // var url2 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
+                .then(() => {
 
+                    // Get Temp, Wind and Humidity from Weather API
+                    var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+                    
                     // Get current weather
-                    fetch(url)
-                    .then((response) => {
-                        return response.json();
+                    fetch(weatherUrl)
+                    .then((weatherResponse) => {
+                        return weatherResponse.json();
                 })
-                    .then((data) => {
-                        console.log(data);
+                    .then((weatherData) => {
+                        console.log(weatherData);
                         // Show current weather for city
                         $(".cityHeading").after(`
                         <section id="currentWeather">
-                        <p>Temp: ${data.main.temp}</p>
-                        <p>Wind: ${data.wind.deg}</p>
-                        <p>Humidity: ${data.main.humidity}</p>
+                        <p>Temp: ${weatherData.main.temp}</p>
+                        <p>Wind: ${weatherData.wind.deg}</p>
+                        <p>Humidity: ${weatherData.main.humidity}</p>
                         <p>UV Index: ${uvi}</p>
                         </section>
                         `);
+                    });
 
+                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+
+                    // Get forecast weather
+                    fetch(forecastUrl)
+                    .then((forecastResponse) => {
+                        return forecastResponse.json();
+                })
+                    .then((forecastData) => {
+                        console.log("forecast", forecastData);
                         // Show future weather for city
                         $(".forecast").after(`
                         <section class="forecastItem">${day1}</section>
@@ -114,8 +119,9 @@ $(".searchButton").click(function (event) {
                         <section class="forecastItem">${day3}</section>
                         <section class="forecastItem">${day4}</section>
                         <section class="forecastItem">${day5}</section>
-                        `);
+                    `);
                     });
+
                 });
             });
             } getLatLong();
