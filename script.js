@@ -5,13 +5,9 @@ var searchHistoryList = $(".search").append(`
 <ul class="searcHistoryList"></ul>
 `);
 var today = moment().format("MM/DD/YY");
-var day1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
-var day2 = moment(today, "MM/DD/YY").add(2, 'days').format("MM/DD/YY");
-var day3 = moment(today, "MM/DD/YY").add(3, 'days').format("MM/DD/YY");
-var day4 = moment(today, "MM/DD/YY").add(4, 'days').format("MM/DD/YY");
-var day5 = moment(today, "MM/DD/YY").add(5, 'days').format("MM/DD/YY");
 var uvi;
 
+// Convert city to Title Case
 function toTitleCase(city) {
     return city.toLowerCase().split(' ').map(function (word) {
       return (word.charAt(0).toUpperCase() + word.slice(1));
@@ -19,16 +15,13 @@ function toTitleCase(city) {
 }
 
 // Show recent searches in search history
-// TO DO: Fix local storage double logging
 if (localStorage.getItem("searchHistory") != null) {
     var existingHistory = JSON.parse(localStorage.getItem("searchHistory"));
     console.log("exsitingHistory: ", existingHistory);
-    // console.log("SearchHistory:", searchHistory);
     if (!existingHistory.includes(searchHistory)) {
         searchHistory = [...existingHistory];
         searchHistory.forEach(city => {
-            console.log(toTitleCase(city));
-            // city = toTitleCase(city);
+            // console.log(toTitleCase(city));
             $(".searcHistoryList").append(`
             <li class="searchedCity">${toTitleCase(city)}</li>
             `);
@@ -40,14 +33,12 @@ if (localStorage.getItem("searchHistory") != null) {
 $(".searchButton").click(function (event) {
 
     // Reset current weather for city
-    // TODO: Get this working
-    event.preventDefault();
-    // console.log($("#currentWeather")[0]);
-    // $("#currentWeather")[0].text();
     city = $(".input").val();
 
     // If City is not null, display information
     if (city) {
+
+        $(".input").val("");
 
         // Add city to search area
         if (!searchHistory.includes(city)) {
@@ -63,14 +54,14 @@ $(".searchButton").click(function (event) {
             localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
         };
 
-        // Replace city name (and convert to Title Case)
-        city = toTitleCase(city);
-        $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
+        // // Replace city name (and convert to Title Case)
+        // city = toTitleCase(city);
+        // $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
         
-        $(".forecast").empty();
-        $(".forecast").append(`
-        <h5>5-Day Forecast:</h>
-        `);
+        // $(".forecast").empty();
+        // $(".forecast").append(`
+        // <h5>5-Day Forecast:</h>
+        // `);
 
         // Get the latitude and longitude of the City
         function getLatLong() {
@@ -82,6 +73,15 @@ $(".searchButton").click(function (event) {
                 return locationReponse.json();
              })
             .then((locationData) => {
+                // console.log(locationData.length);
+                if (locationData.length !== 0) {
+                // Replace city name (and convert to Title Case)
+                city = toTitleCase(city);
+                $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
+                $(".forecast").empty();
+                $(".forecast").append(`
+                <h5>5-Day Forecast:</h>
+                `);
                 var lat = locationData[0].lat;
                 var lon = locationData[0].lon;
 
@@ -106,7 +106,6 @@ $(".searchButton").click(function (event) {
                         return weatherResponse.json();
                 })
                     .then((weatherData) => {
-                        // console.log(weatherData);
                         // Show current weather for city
                         $(".forecastSection").remove();
                         $("#currentWeather").empty();
@@ -126,31 +125,30 @@ $(".searchButton").click(function (event) {
                     fetch(forecastUrl)
                     .then((forecastResponse) => {
                         return forecastResponse.json();
-                })
-                    .then((forecastData) => {
-                        console.log("forecast", forecastData.list.length);
-                        
+                    })
+                    .then((forecastData) => {                        
                         for (let i = 0; i < 5; i++) {
-                            let icon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
-                            console.log("icon", icon);
-                            console.log(forecastData.list[i]);
+                            let forecastIcon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
                             // Show future weather for city
                         $(".forecastDisplay").append(`
                         <section class="forecastSection">
                             <ul class="forecastList">
                                 <li class="forecastItem date">DATE: ${moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY")}</li>
-                                <li class="forecastItem text"><img src="${icon}" /></li>
+                                <li class="forecastItem text"><img src="${forecastIcon}" /></li>
                                 <li class="forecastItem text">Temp: ${forecastData.list[i].main.temp}°F</li>
                                 <li class="forecastItem text">Wind: ${forecastData.list[i].wind.speed} MPH</li>
                                 <li class="forecastItem text">Humidity: ${forecastData.list[i].main.humidity} %</li>
                             </ul>
                         </section>
-                    `);
+                        `);
                         };
                         
                     });
-
                 });
+                } else {
+                    $("#display").empty();
+                    alert("Something went wrong :(");
+                };
             });
             } getLatLong();
 
