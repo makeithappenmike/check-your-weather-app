@@ -11,10 +11,12 @@
 #search {
     /* border: 1px solid black; */
     padding-left: 25px;
+    padding-top: 16px;
 }
 
 .display {
     /* border: 1px solid black; */
+    padding-top: 15px;
 }
 
 .forecast {
@@ -50,7 +52,8 @@
 }
 
 .forecastSection {
-    background-color: rgba(38, 41, 77, 0.826);
+    /* background-color: rgba(38, 41, 77, 0.826); */
+    background-image: linear-gradient(to bottom, darkblue, rgb(85, 142, 241));
     max-width: 250px;
     padding: 5px;
     margin: 5px;

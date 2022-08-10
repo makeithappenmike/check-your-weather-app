@@ -1,9 +1,9 @@
 // Define things
 var city;
 var searchHistory = [];
-var searchHistoryList = $(".search").append(`
-<ul class="searcHistoryList"></ul>
-`);
+// var searchHistoryList = $(".search").append(`
+// <ul class="searcHistoryList"></ul>
+// `);
 var today = moment().format("MM/DD/YY");
 var day1 = moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY");
 var day2 = moment(today, "MM/DD/YY").add(2, 'days').format("MM/DD/YY");
@@ -52,8 +52,10 @@ $(".searchButton").click(function (event) {
         };
 
         // Add the recent search to the searchHistory
-        searchHistory.push(city);
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        if (!searchHistory.includes(city)) {
+            searchHistory.push(city);
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        };
 
         // Replace city name (and convert to Title Case)
         function toTitleCase(city) {
@@ -62,7 +64,7 @@ $(".searchButton").click(function (event) {
             }).join(' ');
         }
         city = toTitleCase(city);
-        $(".cityHeading").text(city);
+        $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
 
         $(".forecast").append(`
         <h5>5-Day Forecast:</h>
@@ -102,7 +104,7 @@ $(".searchButton").click(function (event) {
                         return weatherResponse.json();
                 })
                     .then((weatherData) => {
-                        console.log(weatherData);
+                        // console.log(weatherData);
                         // Show current weather for city
                         $(".cityHeading").after(`
                         <section id="currentWeather">
@@ -132,7 +134,7 @@ $(".searchButton").click(function (event) {
                         $(".forecastDisplay").append(`
                         <section class="forecastSection">
                             <ul class="forecastList">
-                                <li class="forecastItem date">DATE: ${day1}</li>
+                                <li class="forecastItem date">DATE: ${moment(today, "MM/DD/YY").add(1, 'days').format("MM/DD/YY")}</li>
                                 <li class="forecastItem text"><img src="${icon}" /></li>
                                 <li class="forecastItem text">Temp: ${forecastData.list[i].main.temp}°F</li>
                                 <li class="forecastItem text">Wind: ${forecastData.list[i].wind.speed} MPH</li>
