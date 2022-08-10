@@ -13,15 +13,6 @@ var day5 = moment(today, "MM/DD/YY").add(5, 'days').format("MM/DD/YY");
 
 console.log("exsitingHistory: ", existingHistory);
 
-// Load weather from API
-function getWeather(city) {
-var url = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-fetch(url)
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-  console.log("url", url);
-};
-
 // Show recent searches in search history
 if (localStorage.getItem("searchHistory") != null) {
     var existingHistory = JSON.parse(localStorage.getItem("searchHistory"));
@@ -45,14 +36,25 @@ $(".searchButton").click(function () {
         // Replace city name
         $(".cityHeading").text(city);
 
+        // Load weather from API
+        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
+        fetch(url)
+        .then((response) => response.json())
+        .then((data) => console.log("data", data));
+        console.log("url", url);
+
+        var temp = "";
+        var wind = "";
+        var humidity = "";
+        var uvIndex = "";
+
         // Show current weather for city
         $(".cityHeading").after(`
-        <p>Temp:</p>
-        <p>Wind:</p>
-        <p>Humidity</p>
-        <p>UV Index:</p>
+        <p>Temp: ${temp}</p>
+        <p>Wind: ${wind}</p>
+        <p>Humidity: ${humidity}</p>
+        <p>UV Index: ${uvIndex}</p>
         `);
-        getWeather();
 
         // Show future weather for city
         $(".forecast").after(`
