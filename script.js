@@ -70,7 +70,7 @@ $(".searchButton").click(function (event) {
 
         // Get the latitude and longitude of the City
         function getLatLong() {
-            var locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
+            var locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&units=imperial&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
 
             // Call Geo API to get the lat and lon
             fetch(locationUrl)
@@ -82,7 +82,7 @@ $(".searchButton").click(function (event) {
                 var lon = locationData[0].lon;
 
                 // With lat and lon, get the uvIndex
-                var uviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
+                var uviUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
 
                 return fetch(uviUrl)
                 .then((uviResponse) => {
@@ -94,7 +94,7 @@ $(".searchButton").click(function (event) {
                 .then(() => {
 
                     // Get Temp, Wind and Humidity from Weather API
-                    var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+                    var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
                     
                     // Get current weather
                     fetch(weatherUrl)
@@ -114,7 +114,7 @@ $(".searchButton").click(function (event) {
                         `);
                     });
 
-                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&&appid=6798ccba44792929ff2f3dacdfb753cd";
+                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
 
                     // Get forecast weather
                     fetch(forecastUrl)
