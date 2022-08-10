@@ -136,17 +136,17 @@ $(".searchButton").click(function (event) {
                         for (let i = 0; i < 5; i++) {
                             let forecastIcon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
                             // Show future weather for city
-                        $(".forecastDisplay").append(`
-                        <section class="forecastSection">
-                            <ul class="forecastList">
-                                <li class="forecastItem date">DATE: ${moment(today, "MM/DD/YY").add(i + 1, 'days').format("MM/DD/YY")}</li>
-                                <li class="forecastItem text"><img src="${forecastIcon}" /></li>
-                                <li class="forecastItem text">Temp: ${forecastData.list[i].main.temp}°F</li>
-                                <li class="forecastItem text">Wind: ${forecastData.list[i].wind.speed} MPH</li>
-                                <li class="forecastItem text">Humidity: ${forecastData.list[i].main.humidity} %</li>
-                            </ul>
-                        </section>
-                        `);
+                            $(".forecastDisplay").append(`
+                            <section class="forecastSection">
+                                <ul class="forecastList">
+                                    <li class="forecastItem date">DATE: ${moment(today, "MM/DD/YY").add(i + 1, 'days').format("MM/DD/YY")}</li>
+                                    <li class="forecastItem text"><img src="${forecastIcon}" /></li>
+                                    <li class="forecastItem text">Temp: ${forecastData.list[i].main.temp}°F</li>
+                                    <li class="forecastItem text">Wind: ${forecastData.list[i].wind.speed} MPH</li>
+                                    <li class="forecastItem text">Humidity: ${forecastData.list[i].main.humidity} %</li>
+                                </ul>
+                            </section>
+                            `);
                         };
                         
                     });
