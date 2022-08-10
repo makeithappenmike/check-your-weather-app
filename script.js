@@ -103,7 +103,7 @@ $(".searchButton").click(function (event) {
                         `);
                     });
 
-                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=6798ccba44792929ff2f3dacdfb753cd";
+                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&&appid=6798ccba44792929ff2f3dacdfb753cd";
 
                     // Get forecast weather
                     fetch(forecastUrl)
@@ -122,108 +122,19 @@ $(".searchButton").click(function (event) {
                             <ul class="forecastItem">
                                 <li>DATE: ${day1}</li>
                                 <li><img src="${icon}" /></li>
-                                <li>Temp: ${forecastData.list[i].main.temp}</li>
-                                <li>Wind: ${forecastData.list[i].wind.speed}</li>
-                                <li>Humidity: ${forecastData.list[i].main.humidity}</li>
+                                <li>Temp: ${forecastData.list[i].main.temp} degrees</li>
+                                <li>Wind: ${forecastData.list[i].wind.speed}mph</li>
+                                <li>Humidity: ${forecastData.list[i].main.humidity}%</li>
                             </ul>
                         </section>
                     `);
                         };
                         
-                    //     // Show future weather for city
-                    //     $(".forecast").after(`
-                    //     <section class="forecastItem">
-                    //         DATE: ${day1} <br>
-                    //         ${forecastData.list[1].weather[0].icon} <br>
-                    //         Temp: ${forecastData.list[1].main.temp} <br>
-                    //         Wind: ${forecastData.list[1].wind.speed} <br>
-                    //         Humidity: ${forecastData.list[1].main.humidity} <p>
-                    //     </section>
-
-                    //     <section class="forecastItem">
-                    //     DATE: ${day2} <br>
-                    //     <img src="${forecastData.list[2].weather[0].icon + ".png"}" /> <br>
-                    //     Temp: ${forecastData.list[2].main.temp} <br>
-                    //     Wind: ${forecastData.list[2].wind.speed} <br>
-                    //     Humidity: ${forecastData.list[2].main.humidity} <p>
-                    //     </section>
-
-                    //     <section class="forecastItem">
-                    //     DATE: ${day3} <br>
-                    //     ${forecastData.list[3].weather[0].icon} <br>
-                    //     Temp: ${forecastData.list[3].main.temp} <br>
-                    //     Wind: ${forecastData.list[3].wind.speed} <br>
-                    //     Humidity: ${forecastData.list[3].main.humidity} <p>
-                    //     </section>
-
-                    //     <section class="forecastItem">
-                    //     DATE: ${day4} <br>
-                    //     ${forecastData.list[4].weather[0].icon} <br>
-                    //     Temp: ${forecastData.list[4].main.temp} <br>
-                    //     Wind: ${forecastData.list[4].wind.speed} <br>
-                    //     Humidity: ${forecastData.list[4].main.humidity} <p>
-                    //     </section>
-
-                    //     <section class="forecastItem">
-                    //     DATE: ${day5} <br>
-                    //     ${forecastData.list[5].weather[0].icon} <br>
-                    //     Temp: ${forecastData.list[5].main.temp} <br>
-                    //     Wind: ${forecastData.list[6].wind.speed} <br>
-                    //     Humidity: ${forecastData.list[5].main.humidity} <p>
-                    //     </section>
-                    // `);
                     });
 
                 });
             });
             } getLatLong();
-
-        
-
-    //     // Load weather from API
-    //     var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-    //     // var url = "https://api.openweathermap.org/data/3.0/onecall?q=" + city  + "&appid=6798ccba44792929ff2f3dacdfb753cd";
-    //     // var url2 = "https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=6798ccba44792929ff2f3dacdfb753cd";
-
-    //     // Get current weather
-    //     fetch(url)
-    //     .then((response) => {
-    //         return response.json();
-    //    })
-    //     .then((data) => {
-    //         console.log(data);
-    //         // Show current weather for city
-    //         $(".cityHeading").after(`
-    //         <p>Temp: ${data.main.temp}</p>
-    //         <p>Wind: ${data.wind.deg}</p>
-    //         <p>Humidity: ${data.main.humidity}</p>
-    //         <p>UV Index: ${uvi}</p>
-    //         `);
-
-    //                     // // Show future weather for city
-    //         // $(".forecast").after(`
-    //         // <section class="forecastItem">${day1}</section>
-    //         // <section class="forecastItem">${day2}</section>
-    //         // <section class="forecastItem">${day3}</section>
-    //         // <section class="forecastItem">${day4}</section>
-    //         // <section class="forecastItem">${day5}</section>
-    //         // `);
-
-    //         // Add city to search area
-    //         $(".searcHistoryList").append(`
-    //         <li>${city}</li>
-    //         `);
-    //     });
-
-        // console.log("url", url);
-
-        // var temp = "";
-        // var wind = "";
-        // var humidity = "";
-        // var uvIndex = "";
-
-        
-
-        
+            
     }; // add else here to show error
 });
