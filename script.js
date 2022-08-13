@@ -35,6 +35,12 @@ if (localStorage.getItem("searchHistory") != null) {
     };
 };
 
+// Load searchedCity to screen
+$(".searchedCity").click(function (event) {
+    console.log("click");
+});
+
+
 // Handle search button
 $(".searchButton").click(function (event) {
 
