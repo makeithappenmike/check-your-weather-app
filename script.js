@@ -41,7 +41,7 @@ function searchCity(city) {
         $(".input").val("");
 
         // Add city to search area
-        if (!searchHistory.includes(city)) {
+        if (!searchHistory.includes(city.toLowerCase())) {
             // toTitleCase(city);
             $(".searcHistoryList").append(`
             <li class="searchedCity">${toTitleCase(city)}</li>
@@ -49,7 +49,7 @@ function searchCity(city) {
         };
 
         // Add the recent search to the searchHistory
-        if (!searchHistory.includes(city)) {
+        if (!searchHistory.includes(city.toLowerCase())) {
             searchHistory.push(city.toLowerCase());
             localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
         };
