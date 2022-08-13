@@ -109,7 +109,7 @@ $(".searchButton").click(function (event) {
                         $(".cityHeading").after(`
                         <section id="currentWeather">
                         <p>Temp: ${weatherData.main.temp}°F</p>
-                        <p>Wind: ${weatherData.wind.deg} MPH</p>
+                        <p>Wind: ${weatherData.wind.speed} MPH</p>
                         <p>Humidity: ${weatherData.main.humidity} %</p>
                         <p>UV Index: <span class="uvIndexColor">${uvi}</span></p>
                         </section>
@@ -134,7 +134,7 @@ $(".searchButton").click(function (event) {
                         };
                     });
 
-                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=standard&appid=6798ccba44792929ff2f3dacdfb753cd";
+                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
 
                     // Get forecast weather
                     fetch(forecastUrl)
