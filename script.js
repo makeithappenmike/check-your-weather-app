@@ -60,15 +60,6 @@ $(".searchButton").click(function (event) {
             localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
         };
 
-        // // Replace city name (and convert to Title Case)
-        // city = toTitleCase(city);
-        // $(".cityHeading").text(city + "(" + moment(today, "MM/DD/YY").format("MM/DD/YY") + ")");
-        
-        // $(".forecast").empty();
-        // $(".forecast").append(`
-        // <h5>5-Day Forecast:</h>
-        // `);
-
         // Get the latitude and longitude of the City
         function getLatLong() {
             var locationUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&units=imperial&limit=1&appid=6798ccba44792929ff2f3dacdfb753cd";
@@ -123,7 +114,7 @@ $(".searchButton").click(function (event) {
                         <p>UV Index: <span class="uvIndexColor">${uvi}</span></p>
                         </section>
                         `);
-                        
+
                         // Handle UVIndex color
                         if (uvi < 3) {
                             $(".uvIndexColor").css("background-color", "green");
@@ -143,16 +134,19 @@ $(".searchButton").click(function (event) {
                         };
                     });
 
-                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
+                    var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=standard&appid=6798ccba44792929ff2f3dacdfb753cd";
 
                     // Get forecast weather
                     fetch(forecastUrl)
                     .then((forecastResponse) => {
                         return forecastResponse.json();
                     })
-                    .then((forecastData) => {                        
+                    .then((forecastData) => {  
+                        var currentIcon;                      
                         for (let i = 0; i < 5; i++) {
                             let forecastIcon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
+                            currentIcon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
+                            console.log(forecastData.list[i].wind);
                             // Show future weather for city
                             $(".forecastDisplay").append(`
                             <section class="forecastSection">
@@ -166,7 +160,9 @@ $(".searchButton").click(function (event) {
                             </section>
                             `);
                         };
-                        
+                        $(".cityHeading").append(`
+                            <img src="${currentIcon}" />
+                            `);
                     });
                 });
                 } else {
