@@ -79,7 +79,7 @@ $(".searchButton").click(function (event) {
                 return locationReponse.json();
              })
             .then((locationData) => {
-                // console.log(locationData.length);
+                console.log(locationData[0]);
                 if (locationData.length !== 0) {
                 // Replace city name (and convert to Title Case)
                 city = toTitleCase(city);
@@ -103,6 +103,12 @@ $(".searchButton").click(function (event) {
                 })
                 .then(() => {
 
+                    // Handle UVIndex color
+                    console.log(uvi);
+                    if (uvi > 7) {
+
+                    };
+
                     // Get Temp, Wind and Humidity from Weather API
                     var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
                     
@@ -120,7 +126,7 @@ $(".searchButton").click(function (event) {
                         <p>Temp: ${weatherData.main.temp}°F</p>
                         <p>Wind: ${weatherData.wind.deg} MPH</p>
                         <p>Humidity: ${weatherData.main.humidity} %</p>
-                        <p>UV Index: ${uvi}</p>
+                        <p>UV Index: <span class="uvIndexColor">${uvi}</span></p>
                         </section>
                         `);
                     });
