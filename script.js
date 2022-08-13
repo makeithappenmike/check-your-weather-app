@@ -35,17 +35,7 @@ if (localStorage.getItem("searchHistory") != null) {
     };
 };
 
-// Load searchedCity to screen
-$(".searchedCity").click(function (event) {
-    console.log("click");
-});
-
-
-// Handle search button
-$(".searchButton").click(function (event) {
-
-    // Reset current weather for city
-    city = $(".input").val();
+function searchCity(city) {
 
     // If City is not null, display information
     if (city) {
@@ -179,4 +169,21 @@ $(".searchButton").click(function (event) {
             } getLatLong();
 
     }; // add else here to show error
+    };
+
+
+// Handle search button
+$(".searchButton").click(function (event) {
+
+    
+    // Reset current weather for city
+    city = $(".input").val();
+
+    searchCity(city);
+});
+
+// Load searchedCity to screen
+$(".searchedCity").click(function (event) {
+    var newSearchCity = $(this).text();
+    searchCity(newSearchCity);
 });
