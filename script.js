@@ -155,6 +155,7 @@ function searchCity(city) {
                 } else {
                     $("#display").empty();
                     alert("Something went wrong :(");
+                    location.reload();
                 };
             });
             } getLatLong();
