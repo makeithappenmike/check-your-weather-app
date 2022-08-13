@@ -87,7 +87,7 @@
 }
 
 .uvIndexColor {
-    background-color: red;
+    /* background-color: red; */
     max-width:fit-content;
     border-radius: 5px;
     padding: 3px 3px 3px 3px;

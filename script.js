@@ -103,12 +103,6 @@ $(".searchButton").click(function (event) {
                 })
                 .then(() => {
 
-                    // Handle UVIndex color
-                    console.log(uvi);
-                    if (uvi > 7) {
-
-                    };
-
                     // Get Temp, Wind and Humidity from Weather API
                     var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
                     
@@ -129,6 +123,24 @@ $(".searchButton").click(function (event) {
                         <p>UV Index: <span class="uvIndexColor">${uvi}</span></p>
                         </section>
                         `);
+                        
+                        // Handle UVIndex color
+                        if (uvi < 3) {
+                            $(".uvIndexColor").css("background-color", "green");
+                            console.log("green");
+                        } else if (uvi < 6) {
+                            $(".uvIndexColor").css("background-color", "yellow");
+                            console.log("yellow");
+                        } else if (uvi < 8) {
+                            $(".uvIndexColor").css("background-color", "orange");
+                            console.log("orange");
+                        } else if (uvi < 11) {
+                            $(".uvIndexColor").css("background-color", "red");
+                            console.log("red");
+                        } else if (uvi > 10) {
+                            $(".uvIndexColor").css("background-color", "pink");
+                            console.log("pink");
+                        };
                     });
 
                     var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=6798ccba44792929ff2f3dacdfb753cd";
