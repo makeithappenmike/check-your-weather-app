@@ -23,11 +23,9 @@ function toTitleCase(city) {
 // Show recent searches in search history
 if (localStorage.getItem("searchHistory") != null) {
     var existingHistory = JSON.parse(localStorage.getItem("searchHistory"));
-    console.log("exsitingHistory: ", existingHistory);
     if (!existingHistory.includes(searchHistory)) {
         searchHistory = [...existingHistory];
         searchHistory.forEach(city => {
-            // console.log(toTitleCase(city));
             $(".searcHistoryList").append(`
             <li class="searchedCity">${toTitleCase(city)}</li>
             `);
@@ -66,7 +64,6 @@ function searchCity(city) {
                 return locationReponse.json();
              })
             .then((locationData) => {
-                console.log(locationData[0]);
                 if (locationData.length !== 0) {
                 // Replace city name (and convert to Title Case)
                 city = toTitleCase(city);
@@ -114,19 +111,14 @@ function searchCity(city) {
                         // Handle UVIndex color
                         if (uvi < 3) {
                             $(".uvIndexColor").css("background-color", "green");
-                            console.log("green");
                         } else if (uvi < 6) {
                             $(".uvIndexColor").css("background-color", "yellow");
-                            console.log("yellow");
                         } else if (uvi < 8) {
                             $(".uvIndexColor").css("background-color", "orange");
-                            console.log("orange");
                         } else if (uvi < 11) {
                             $(".uvIndexColor").css("background-color", "red");
-                            console.log("red");
                         } else if (uvi > 10) {
                             $(".uvIndexColor").css("background-color", "pink");
-                            console.log("pink");
                         };
                     });
 
@@ -142,7 +134,6 @@ function searchCity(city) {
                         for (let i = 0; i < 5; i++) {
                             let forecastIcon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
                             currentIcon = "https://openweathermap.org/img/w/" + forecastData.list[i].weather[0].icon + ".png";
-                            console.log(forecastData.list[i].wind);
                             // Show future weather for city
                             $(".forecastDisplay").append(`
                             <section class="forecastSection">
