@@ -13,12 +13,10 @@ For UVIndex, depending on the value you'll see a corresponding color represented
 
 TODO: Fix search history dom logging
 
-View the site here: https://makeithappenmike.github.io/portfolio/
+View the site here: https://makeithappenmike.github.io/check-your-weather-app/
 
 Contributions by Michael Martens
 
 Screenshot:
 
-<img src="assets/images/screenshot.png" alt="screenshot of portfolio" />
-<br>
-<img src="assets/images/apps_screenshot.png" alt="screenshot of portfolio" />
+<img src="assets/images/WeatherApp.png" alt="screenshot of weather app" />
